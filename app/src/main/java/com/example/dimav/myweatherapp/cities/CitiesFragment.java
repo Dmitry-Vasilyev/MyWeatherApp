@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 public class CitiesFragment extends Fragment implements CitiesContract.View{
+
     private CitiesContract.Presenter presenter;
 
     public CitiesFragment() {
