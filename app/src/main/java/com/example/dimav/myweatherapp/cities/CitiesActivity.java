@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.dimav.myweatherapp.data.models.weathermodel.CurrentWeatherModel;
+import com.example.dimav.myweatherapp.data.models.currentweathermodel.remote.CurrentWeatherRemote;
 import com.example.dimav.myweatherapp.data.source.remote.ApiClient;
 import com.example.dimav.myweatherapp.data.source.remote.WeatherService;
 import com.example.dimav.myweatherapp.utils.ActivityUtils;
@@ -39,26 +39,26 @@ public class CitiesActivity extends AppCompatActivity {
 
 
 
+
+
         WeatherService service = ApiClient.getApi();
 
-        Log.d("My", Boolean.toString(ActivityUtils.hasConnection(getApplicationContext())));
         service.getWeatherForCityGroups("524901,703448,2643743",
-                Constants.API_METRIC, Constants.API_KEY).enqueue(new Callback<CurrentWeatherModel>() {
+                Constants.API_METRIC, Constants.API_KEY).enqueue(new Callback<CurrentWeatherRemote>() {
             @Override
-            public void onResponse(Call<CurrentWeatherModel> call, Response<CurrentWeatherModel> response) {
+            public void onResponse(Call<CurrentWeatherRemote> call, Response<CurrentWeatherRemote> response) {
                 Log.d("My", response.code()+"");
                 Toast.makeText(getApplicationContext(),"From onResponse", Toast.LENGTH_LONG).show();
                 if(response.isSuccessful()) {
-                    CurrentWeatherModel result = response.body();
-                    Log.d("My", result.getList().get(0).getName());
-
-
+                    CurrentWeatherRemote result = response.body();
+                    Log.d("My", result.getCityCur().get(0).getName());
                 }
             }
 
             @Override
-            public void onFailure(Call<CurrentWeatherModel> call, Throwable t) {
+            public void onFailure(Call<CurrentWeatherRemote> call, Throwable t) {
                 t.printStackTrace();
+                Log.d("My", "from onFailure");
                 Log.d("My", t.getMessage());
                 Toast.makeText(getApplicationContext(),"Error loading from API", Toast.LENGTH_LONG).show();
             }

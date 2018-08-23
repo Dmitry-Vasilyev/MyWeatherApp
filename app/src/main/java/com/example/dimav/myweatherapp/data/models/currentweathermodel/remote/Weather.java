@@ -1,5 +1,5 @@
 
-package com.example.dimav.myweatherapp.data.models.weathermodel;
+package com.example.dimav.myweatherapp.data.models.currentweathermodel.remote;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
