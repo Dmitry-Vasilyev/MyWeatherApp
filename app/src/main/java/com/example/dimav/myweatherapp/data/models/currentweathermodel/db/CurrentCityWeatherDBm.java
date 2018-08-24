@@ -1,24 +1,29 @@
-package com.example.dimav.myweatherapp.data.models;
+package com.example.dimav.myweatherapp.data.models.currentweathermodel.db;
 
-import android.arch.core.util.Function;
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 
-import java.util.Date;
 import java.util.Objects;
 import java.util.Random;
 
-public class CurrentCityWeather {
-    private int id;
-    private String country;
-    private String city;
-    private Date date;
-    private int temperature;
-    private String unit;
+/**
+ * Immutable model class for CurrentCityWeather
+ */
+@Entity(tableName = "cities")
+public final class CurrentCityWeatherDBm {
+    @PrimaryKey
+    @ColumnInfo(name = "cityid")
+    private final int id;
+    private final String country;
+    private final String city;
+    private final Long date;
+    private final int temperature;
+    private final String unit;
 
-
-
-
-    public CurrentCityWeather(int id, String country, String city,
-                              Date date, int temperature, String unit) {
+    public CurrentCityWeatherDBm(int id, String country, String city,
+                              long date, int temperature, String unit) {
         this.id = id;
         this.country = country;
         this.city = city;
@@ -27,12 +32,13 @@ public class CurrentCityWeather {
         this.unit = unit;
     }
 
-    public CurrentCityWeather() {
+    @Ignore
+    public CurrentCityWeatherDBm() {
         Random random = new Random();
         this.id = random.nextInt();
         this.country = String.valueOf(random.nextInt(1000000));
         this.city = String.valueOf(random.nextInt(1000000));
-        this.date = new Date(random.nextLong());
+        this.date = random.nextLong();
         this.temperature = random.nextInt(100);
         this.unit = String.valueOf(random.nextInt(100));
     }
@@ -41,55 +47,31 @@ public class CurrentCityWeather {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getCountry() {
         return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public Date getDate() {
+    public Long getDate() {
         return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public int getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(int temperature) {
-        this.temperature = temperature;
-    }
-
     public String getUnit() {
         return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CurrentCityWeather that = (CurrentCityWeather) o;
+        CurrentCityWeatherDBm that = (CurrentCityWeatherDBm) o;
         return temperature == that.temperature &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(country, that.country) &&
@@ -115,4 +97,6 @@ public class CurrentCityWeather {
                 ", unit='" + unit + '\'' +
                 '}';
     }
+
+
 }
