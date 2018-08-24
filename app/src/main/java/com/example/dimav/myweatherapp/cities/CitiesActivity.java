@@ -1,16 +1,23 @@
 package com.example.dimav.myweatherapp.cities;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.dimav.myweatherapp.data.models.currentweathermodel.db.CurrentCityWeatherEntity;
 import com.example.dimav.myweatherapp.data.models.currentweathermodel.remote.CurrentWeatherRemote;
+import com.example.dimav.myweatherapp.data.source.local.CurrentCityWeatherDao;
+import com.example.dimav.myweatherapp.data.source.local.ToDoDatabase;
 import com.example.dimav.myweatherapp.data.source.remote.ApiClient;
 import com.example.dimav.myweatherapp.data.source.remote.WeatherService;
 import com.example.dimav.myweatherapp.utils.ActivityUtils;
 import com.example.dimav.myweatherapp.R;
 import com.example.dimav.myweatherapp.utils.Constants;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,6 +70,51 @@ public class CitiesActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Error loading from API", Toast.LENGTH_LONG).show();
             }
         });
+
+        ToDoDatabase db = ToDoDatabase.getInstance(this);
+        CurrentCityWeatherDao dao = db.currentCityWeatherDao();
+
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<CurrentCityWeatherEntity> list = new ArrayList<>(dao.getCities());
+
+                if(list.size() == 0) {
+                    dao.insertCity(new CurrentCityWeatherEntity());
+                    dao.insertCity(new CurrentCityWeatherEntity());
+                    dao.insertCity(new CurrentCityWeatherEntity());
+
+                    list = new ArrayList<>(dao.getCities());
+                }
+                Log.d("My", "Cities in DB: " + list.size());
+                for(CurrentCityWeatherEntity item: list) {
+                    Log.d("My", item.toString());
+                }
+            }
+        };
+
+        Thread thread = new Thread(runnable);
+        thread.start();
+
+
+//        Handler handler = new Handler(Looper.getMainLooper());
+//        handler.post(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                ArrayList<CurrentCityWeatherEntity> list = new ArrayList<>(dao.getCities());
+//
+//                if(list.size() == 0) {
+//                    dao.insertCity(new CurrentCityWeatherEntity());
+//                    dao.insertCity(new CurrentCityWeatherEntity());
+//                    dao.insertCity(new CurrentCityWeatherEntity());
+//
+//                    list = new ArrayList<>(dao.getCities());
+//                }
+//                Log.d("My", "Cities in DB: " + list.size());
+//            }
+//        });
     }
 
 

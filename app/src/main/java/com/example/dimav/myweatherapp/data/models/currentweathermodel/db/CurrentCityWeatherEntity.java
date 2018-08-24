@@ -11,10 +11,10 @@ import java.util.Random;
 /**
  * Immutable model class for CurrentCityWeather
  */
-@Entity(tableName = "cities")
-public final class CurrentCityWeatherDBm {
+@Entity(tableName = "Cities")
+public final class CurrentCityWeatherEntity {
     @PrimaryKey
-    @ColumnInfo(name = "cityid")
+    @ColumnInfo(name = "entryid")
     private final int id;
     private final String country;
     private final String city;
@@ -22,8 +22,8 @@ public final class CurrentCityWeatherDBm {
     private final int temperature;
     private final String unit;
 
-    public CurrentCityWeatherDBm(int id, String country, String city,
-                              long date, int temperature, String unit) {
+    public CurrentCityWeatherEntity(int id, String country, String city,
+                                    long date, int temperature, String unit) {
         this.id = id;
         this.country = country;
         this.city = city;
@@ -33,7 +33,7 @@ public final class CurrentCityWeatherDBm {
     }
 
     @Ignore
-    public CurrentCityWeatherDBm() {
+    public CurrentCityWeatherEntity() {
         Random random = new Random();
         this.id = random.nextInt();
         this.country = String.valueOf(random.nextInt(1000000));
@@ -71,7 +71,7 @@ public final class CurrentCityWeatherDBm {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CurrentCityWeatherDBm that = (CurrentCityWeatherDBm) o;
+        CurrentCityWeatherEntity that = (CurrentCityWeatherEntity) o;
         return temperature == that.temperature &&
                 Objects.equals(id, that.id) &&
                 Objects.equals(country, that.country) &&
@@ -97,6 +97,4 @@ public final class CurrentCityWeatherDBm {
                 ", unit='" + unit + '\'' +
                 '}';
     }
-
-
 }
