@@ -42,7 +42,7 @@ public class CitiesActivity extends AppCompatActivity {
                     R.id.contentFrame);
         }
         //Create the presenter
-        presenter = new CitiesPresenter();
+        presenter = new CitiesPresenter(citiesFragment);
 
 
 
@@ -96,25 +96,6 @@ public class CitiesActivity extends AppCompatActivity {
 
         Thread thread = new Thread(runnable);
         thread.start();
-
-
-//        Handler handler = new Handler(Looper.getMainLooper());
-//        handler.post(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                ArrayList<CurrentCityWeatherEntity> list = new ArrayList<>(dao.getCities());
-//
-//                if(list.size() == 0) {
-//                    dao.insertCity(new CurrentCityWeatherEntity());
-//                    dao.insertCity(new CurrentCityWeatherEntity());
-//                    dao.insertCity(new CurrentCityWeatherEntity());
-//
-//                    list = new ArrayList<>(dao.getCities());
-//                }
-//                Log.d("My", "Cities in DB: " + list.size());
-//            }
-//        });
     }
 
 
