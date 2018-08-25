@@ -9,6 +9,7 @@ import retrofit2.http.Query;
 
 public interface WeatherService {
     @GET(Constants.API_GROUP)
-    Call<CurrentWeatherRemote> getWeatherForCityGroups(@Query("id") String citiesIds,
-                                                       @Query("units") String units, @Query("appid") String appid);
+    Call<CurrentWeatherRemote> getWeatherForCityGroups(
+            @Query("id") String citiesIds, @Query("units") String units,
+            @Query("appid") String appid);
 }

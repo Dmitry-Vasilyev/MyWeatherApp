@@ -14,7 +14,7 @@ public interface CitiesContract {
 
         void showAddCity();
 
-        void showCityDetails();
+        void showCityDetails(CurrentCityWeather cityWeather);
 
         boolean isActive();
 

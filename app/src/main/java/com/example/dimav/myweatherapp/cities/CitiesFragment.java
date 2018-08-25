@@ -68,7 +68,8 @@ public class CitiesFragment extends Fragment implements CitiesContract.View{
         listView.setAdapter(citiesAdapter);
 
 
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_add_city);
+        FloatingActionButton fab =
+                (FloatingActionButton) getActivity().findViewById(R.id.fab_add_city);
 
         fab.setImageResource(R.drawable.ic_add);
 
@@ -90,7 +91,7 @@ public class CitiesFragment extends Fragment implements CitiesContract.View{
 
 
     CityItemListener<CurrentCityWeather> itemListener =
-            city -> Toast.makeText(getContext(), city.getCity(), Toast.LENGTH_LONG).show();
+            this::showCityDetails;
 
     @Override
     public void setLoadingIndicator(boolean active) {
@@ -115,8 +116,8 @@ public class CitiesFragment extends Fragment implements CitiesContract.View{
     }
 
     @Override
-    public void showCityDetails() {
-        Toast.makeText(getContext(), "showCityDetails()", Toast.LENGTH_SHORT).show();
+    public void showCityDetails(CurrentCityWeather city) {
+        Toast.makeText(getContext(), city.getCity(), Toast.LENGTH_LONG).show();
     }
 
     @Override
