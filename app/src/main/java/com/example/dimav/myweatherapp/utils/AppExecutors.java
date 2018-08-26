@@ -28,7 +28,7 @@ public class AppExecutors {
                 new MainThreadExecutor());
     }
 
-    public Executor DiskIO() {
+    public Executor diskIO() {
         return diskIO;
     }
 

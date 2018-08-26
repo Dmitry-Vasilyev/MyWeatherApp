@@ -20,6 +20,7 @@ import com.example.dimav.myweatherapp.data.models.CurrentCityWeather;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class CitiesFragment extends Fragment implements CitiesContract.View{
 
@@ -41,10 +42,11 @@ public class CitiesFragment extends Fragment implements CitiesContract.View{
         citiesAdapter = new CitiesAdapter(new ArrayList<CurrentCityWeather>(0),
                 itemListener);
         ArrayList<CurrentCityWeather> arrayList = new ArrayList<>();
-        arrayList.add(new CurrentCityWeather());
-        arrayList.add(new CurrentCityWeather());
-        arrayList.add(new CurrentCityWeather());
-        arrayList.add(new CurrentCityWeather());
+        Random rnd = new Random();
+        arrayList.add(new CurrentCityWeather(rnd));
+        arrayList.add(new CurrentCityWeather(rnd));
+        arrayList.add(new CurrentCityWeather(rnd));
+        arrayList.add(new CurrentCityWeather(rnd));
         citiesAdapter.replaceData(arrayList);
     }
 

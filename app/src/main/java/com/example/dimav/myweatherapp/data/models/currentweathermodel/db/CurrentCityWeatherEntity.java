@@ -33,8 +33,7 @@ public final class CurrentCityWeatherEntity {
     }
 
     @Ignore
-    public CurrentCityWeatherEntity() {
-        Random random = new Random();
+    public CurrentCityWeatherEntity(Random random) {
         this.id = random.nextInt();
         this.country = String.valueOf(random.nextInt(1000000));
         this.city = String.valueOf(random.nextInt(1000000));

@@ -27,14 +27,17 @@ public class CurrentCityWeather {
         this.unit = unit;
     }
 
-    public CurrentCityWeather() {
-        Random random = new Random();
+    public CurrentCityWeather(Random random) {
         this.id = random.nextInt();
         this.country = String.valueOf(random.nextInt(1000000));
         this.city = String.valueOf(random.nextInt(1000000));
         this.date = new Date(random.nextLong());
         this.temperature = random.nextInt(100);
         this.unit = String.valueOf(random.nextInt(100));
+    }
+
+    public CurrentCityWeather() {
+
     }
 
     public int getId() {
